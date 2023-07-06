@@ -11,6 +11,18 @@ get_bootpart() {
 	echo "$current_slot"
 }
 
+reset_unbootable_status() {
+	local AB="AB"
+	local slot="Slot${AB:$1:1}"
+	local varname="781e084c-a330-417c-b678-38e696380cb9-RootfsStatus${slot}"
+
+	local f=$(mktemp)
+	printf "\x00\x00\x00\x00" > $f
+	efivar -n "${varname}" -f $f -w
+	rm ${f}
+}
+
+
 current_slot=`get_bootpart`
 echo "current_slot=$current_slot" >&2
 
@@ -23,4 +35,6 @@ fi
 
 echo "next_slot=$next_slot" >&2
 nvbootctrl set-active-boot-slot $next_slot
+reset_unbootable_status $next_slot
+
 exit 0

@@ -46,7 +46,7 @@ function write_efivar() {
 
 function read_efivar() {
 	local readonly varname="/sys/firmware/efi/efivars/KernelCommandLine-781e084c-a330-417c-b678-38e696380cb9"
-	local var=$(cat $varname | tail -c +4 | tr -d '[\000]')
+	local var=$(cat $varname | tail -c +5 | tr -d '[\000]')
 
 	echo -n "$var"
 }
