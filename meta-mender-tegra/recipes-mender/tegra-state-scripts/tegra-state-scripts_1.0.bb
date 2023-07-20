@@ -32,9 +32,9 @@ do_compile() {
     :
 }
 
-do_compile:tegra194() {
-    copy_install_script
-}
+# do_compile:tegra194() {
+#     copy_install_script
+# }
 
 do_compile:tegra186() {
     copy_install_script
@@ -44,7 +44,7 @@ do_compile:tegra210() {
     cp ${S}/redundant-boot-install-script-uboot ${MENDER_STATE_SCRIPTS_DIR}/ArtifactInstall_Leave_80_bl-update
 }
 
-do_compile:tegra234() {
+do_compile:tegra194() {
     cp ${S}/switch-rootfs ${MENDER_STATE_SCRIPTS_DIR}/ArtifactInstall_Leave_50_switch-rootfs
 }
 

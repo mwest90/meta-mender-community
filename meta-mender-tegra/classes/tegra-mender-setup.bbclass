@@ -36,6 +36,7 @@ PREFERRED_PROVIDER_libubootenv:tegra = "${@'libubootenv-fake' if d.getVar('PREFE
 PREFERRED_RPROVIDER_u-boot-fw-utils = "u-boot-fw-utils-tegra"
 PREFERRED_RPROVIDER_libubootenv-bin:tegra = "${@'libubootenv-fake' if d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('cboot') else 'libubootenv-bin'}"
 PREFERRED_PROVIDER_libubootenv:tegra234 = "libubootenv-fake"
+PREFERRED_PROVIDER_libubootenv:tegra194 = "libubootenv-fake"
 
 # Note: this isn't really a boot file, just put it here to keep the mender build from
 # complaining about empty IMAGE_BOOT_FILES.  We won't use the full image anyway, just the mender file
@@ -46,14 +47,14 @@ IMAGE_BOOT_FILES = "u-boot-dtb.bin"
 # boot into an emergency shell and examine the /dev/mmcblk* devices,
 # or use the uboot console to look at mtdparts
 MENDER_DATA_PART_NUMBER_DEFAULT:tegra186 = "34"
-MENDER_DATA_PART_NUMBER_DEFAULT:tegra194 = "43"
+MENDER_DATA_PART_NUMBER_DEFAULT:tegra194 = "42"
 MENDER_DATA_PART_NUMBER_DEFAULT:tegra210 = "${@'16' if (d.getVar('TEGRA_SPIFLASH_BOOT') or '') == '1' else '23'}"
 MENDER_DATA_PART_NUMBER_DEFAULT:jetson-nano-emmc = "19"
 MENDER_DATA_PART_NUMBER_DEFAULT:xavier-nx = "12"
 MENDER_DATA_PART_NUMBER_DEFAULT:tegra234 = "16"
 MENDER_ROOTFS_PART_A_NUMBER_DEFAULT = "1"
 MENDER_ROOTFS_PART_B_NUMBER_DEFAULT:tegra186 = "33"
-MENDER_ROOTFS_PART_B_NUMBER_DEFAULT:tegra194 = "42"
+MENDER_ROOTFS_PART_B_NUMBER_DEFAULT:tegra194 = "2"
 MENDER_ROOTFS_PART_B_NUMBER_DEFAULT:tegra210 = "${@'15' if (d.getVar('TEGRA_SPIFLASH_BOOT') or '') == '1' else '22'}"
 MENDER_ROOTFS_PART_B_NUMBER_DEFAULT:jetson-nano-emmc = "18"
 MENDER_ROOTFS_PART_B_NUMBER_DEFAULT:xavier-nx = "11"
@@ -94,7 +95,7 @@ ROOTFSPART_SIZE = "${@tegra_mender_set_rootfs_partsize(${MENDER_CALC_ROOTFS_SIZE
 # Default for thud and later is grub integration but we need to use u-boot integration already included.
 # Leave out sdimg since we don't use this with tegra (instead use
 # tegraflash)
-MENDER_FEATURES_ENABLE:append:tegra = "${@tegra_mender_uboot_feature(d)}"
+# MENDER_FEATURES_ENABLE:append:tegra = "${@tegra_mender_uboot_feature(d)}"
 MENDER_FEATURES_DISABLE:append:tegra = " mender-grub mender-image-uefi"
 
 # Use these variables to adjust your total rootfs size across both
@@ -142,7 +143,7 @@ do_image_mender[depends] += "${_MENDER_IMAGE_DEPS_EXTRA}"
 # mender-setup-image adds kernel-image and kernel-devicetree
 # to MACHINE_ESSENTIAL_EXTRA_RDEPENDS, but they should *not*
 # be included by default on cboot platforms.
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS:remove:tegra194 = "kernel-image kernel-devicetree"
+#MACHINE_ESSENTIAL_EXTRA_RDEPENDS:remove:tegra194 = "kernel-image kernel-devicetree"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS:remove:tegra186 = "${@'kernel-image kernel-devicetree' if (d.getVar('PREFERRED_PROVIDER_virtual/bootloader') or '').startswith('cboot') else ''}"
 
 # Compatibility settings for handling the machine name changes
