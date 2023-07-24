@@ -37,6 +37,7 @@ PREFERRED_RPROVIDER_u-boot-fw-utils = "u-boot-fw-utils-tegra"
 PREFERRED_RPROVIDER_libubootenv-bin:tegra = "${@'libubootenv-fake' if d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('cboot') else 'libubootenv-bin'}"
 PREFERRED_PROVIDER_libubootenv:tegra234 = "libubootenv-fake"
 PREFERRED_PROVIDER_libubootenv:tegra194 = "libubootenv-fake"
+MENDER_FEATURES_DISABLE:append = " mender-uboot"
 
 # Note: this isn't really a boot file, just put it here to keep the mender build from
 # complaining about empty IMAGE_BOOT_FILES.  We won't use the full image anyway, just the mender file
