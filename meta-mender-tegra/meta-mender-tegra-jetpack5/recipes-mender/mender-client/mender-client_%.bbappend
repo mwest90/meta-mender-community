@@ -1,12 +1,12 @@
 EXTRADEPS = ""
-EXTRADEPS:tegra = "tegra-bup-payload tegra-boot-tools tegra-boot-tools-nvbootctrl tegra-boot-tools-lateboot${@' libubootenv-fake' if d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('cboot') else ''}"
+#EXTRADEPS:tegra = "tegra-bup-payload tegra-boot-tools tegra-boot-tools-nvbootctrl tegra-boot-tools-lateboot${@' libubootenv-fake' if d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('cboot') else ''}"
 EXTRADEPS:tegra210 = "tegra-bup-payload tegra-boot-tools"
 EXTRADEPS:tegra194 = "tegra-bup-payload libubootenv-fake mender-update-verifier"
 EXTRADEPS:jetson-agx-orin-devkit = "tegra-bup-payload libubootenv-fake mender-update-verifier"
 RDEPENDS:${PN} += "${EXTRADEPS}"
 
 FILESEXTRAPATHS:prepend:tegra234 := "${THISDIR}/files/tegra234:"
-FILESEXTRAPATHS:prepend:tegra194 := "${THISDIR}/files/tegra234:"
+FILESEXTRAPATHS:prepend:tegra194 := "${THISDIR}/files/tegra194:"
 
 SRC_URI:remove:mender-persist-systemd-machine-id = " \
     file://mender-client-set-systemd-machine-id.sh \

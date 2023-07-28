@@ -1,6 +1,5 @@
 SRC_URI = " \
     file://switch-rootfs \
-    file://switch-rootfs-194 \
 "
 
 LICENSE = "Apache-2.0"
@@ -22,7 +21,7 @@ do_compile:tegra234() {
 }
 
 do_compile:tegra194() {
-    cp ${S}/switch-rootfs-194 ${MENDER_STATE_SCRIPTS_DIR}/ArtifactInstall_Leave_50_switch-rootfs
+    cp ${S}/switch-rootfs ${MENDER_STATE_SCRIPTS_DIR}/ArtifactInstall_Leave_50_switch-rootfs
 }
 
 # Make sure scripts aren't left around from old builds

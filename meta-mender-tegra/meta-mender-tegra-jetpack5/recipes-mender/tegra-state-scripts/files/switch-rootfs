@@ -34,7 +34,7 @@ else
 fi
 
 echo "next_slot=$next_slot" >&2
-nvbootctrl set-SR-BR $next_slot
+nvbootctrl set-active-boot-slot $next_slot
 reset_unbootable_status $next_slot
 
 exit 0
