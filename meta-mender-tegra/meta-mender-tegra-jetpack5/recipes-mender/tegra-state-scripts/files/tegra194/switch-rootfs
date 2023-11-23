@@ -14,10 +14,10 @@ get_bootpart() {
 reset_unbootable_status() {
 	local AB="AB"
 	local slot="Slot${AB:$1:1}"
-	local varname="RootfsStatus${slot}-781e084c-a330-417c-b678-38e696380cb9"
+	local varname="/opt/nvidia/esp/EFI/NVDA/Variables/RootfsStatus${slot}-781e084c-a330-417c-b678-38e696380cb9"
 
 	local f=$(mktemp)
-	printf "\x00\x00\x00\x00" > $f
+	printf "\x07\x00\x00\x00\x00\x00\x00\x00" > $f
 	dd if=$f of=$varname
 	rm ${f}
 }
