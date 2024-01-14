@@ -341,7 +341,7 @@
             <description> **Required.** Chain A; contains BPMP firmware device tree blob
               (DTB). </description>
         </partition>
-        <partition name="xusb-fw" type="xusb_fw">
+        <partition name="xusb-fw" type="xusb_fw" oem_sign="true">
             <allocation_policy> sequential </allocation_policy>
             <filesystem_type> basic </filesystem_type>
             <size> 163840 </size>
@@ -505,7 +505,7 @@
             <description> **Required.** Chain B; contains BPMP firmware device tree blob
               (DTB). </description>
         </partition>
-        <partition name="xusb-fw_b" type="xusb_fw">
+        <partition name="xusb-fw_b" type="xusb_fw" oem_sign="true">
             <allocation_policy> sequential </allocation_policy>
             <filesystem_type> basic </filesystem_type>
             <size> 163840 </size>
