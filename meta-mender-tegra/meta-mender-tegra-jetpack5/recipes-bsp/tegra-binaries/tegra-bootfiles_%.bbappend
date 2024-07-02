@@ -21,5 +21,12 @@ EOF
 }
 
 do_install:append:tegra194() {
-    # Do nothing
+    # Remove invalid start locations from upstream L4T partition layout files that
+    # prevents the Mender data partition to use remaining space.
+    sed -i -e 's#<start_location> 0x708400000 </start_location>##g' \
+           -e 's#<start_location> 0x710800000 </start_location>##g' \
+		   ${D}${datadir}/tegraflash/${PARTITION_LAYOUT_TEMPLATE}
+    sed -i -e 's#<start_location> 0x708400000 </start_location>##g' \
+           -e 's#<start_location> 0x710800000 </start_location>##g' \
+		   ${D}${datadir}/tegraflash/${PARTITION_LAYOUT_EXTERNAL}
 }
