@@ -1,3 +1,7 @@
+DEPENDS += "mender-custom-flash-layout"
+MENDER_PARTITION_FILE:tegra194 = "${STAGING_DATADIR}/mender-flash-layout/flash_mender.xml"
+PARTITION_FILE:tegra194 = "${MENDER_PARTITION_FILE}"
+
 
 do_install:append() {
     cat <<EOF >${WORKDIR}/UDA.xml
@@ -18,12 +22,5 @@ EOF
 }
 
 do_install:append:tegra194() {
-    # Remove invalid start locations from upstream L4T partition layout files that
-    # prevents the Mender data partition to use remaining space.
-    sed -i -e 's#<start_location> 0x708400000 </start_location>##g' \
-           -e 's#<start_location> 0x710800000 </start_location>##g' \
-		   ${D}${datadir}/tegraflash/${PARTITION_LAYOUT_TEMPLATE}
-    sed -i -e 's#<start_location> 0x708400000 </start_location>##g' \
-           -e 's#<start_location> 0x710800000 </start_location>##g' \
-		   ${D}${datadir}/tegraflash/${PARTITION_LAYOUT_EXTERNAL}
+    # Do nothing
 }
